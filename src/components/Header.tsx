@@ -35,24 +35,13 @@ export function Header({ language, setLanguage }: PropsHeader) {
       default:
         setLanguageText("Language:");
         setLanguageEnglish("English");
-        setLanguagePortuguese("English");
+        setLanguagePortuguese("Portuguese");
         break;
     }
   }, [language]);
 
   function handleLanguage(event: SelectChangeEvent) {
     setLanguage(event?.target.value);
-    /* switch (language) {
-      case "EN":
-        setLanguage("PT-BR");
-        break;
-      case "PT-BR":
-        setLanguage("EN");
-        break;
-      default:
-        setLanguage("EN");
-        break;
-    } */
   }
 
   console.log(language);

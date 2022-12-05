@@ -48,7 +48,7 @@ const posts = [
 ];
 
 export function App() {
-  const [language, setLanguage] = useState<string>("EN");
+  const [language, setLanguage] = useState("EN");
 
   return (
     <div>

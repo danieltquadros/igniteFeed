@@ -45,13 +45,12 @@ export function Post({ author, publishedAt, content, language }: PostProps) {
       locale: enUS,
     })
   );
-  const [publishedDateRelativeToNow, setPublishedDateRelativeToNow] =
-    useState<string>(
-      formatDistanceToNow(publishedAt, {
-        locale: enUS,
-        addSuffix: true,
-      })
-    );
+  const [publishedDateRelativeToNow, setPublishedDateRelativeToNow] = useState(
+    formatDistanceToNow(publishedAt, {
+      locale: enUS,
+      addSuffix: true,
+    })
+  );
 
   useEffect(() => {
     switch (language) {
