@@ -1,6 +1,13 @@
 import { format, formatDistanceToNow } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
-import { ChangeEvent, FormEvent, InvalidEvent, useState } from "react";
+import enUS from "date-fns/esm/locale/en-US";
+import {
+  ChangeEvent,
+  FormEvent,
+  InvalidEvent,
+  useEffect,
+  useState,
+} from "react";
 
 import { Avatar } from "./Avatar";
 import { Comment } from "./Comment";
@@ -22,24 +29,85 @@ interface PostProps {
   author: Author;
   publishedAt: Date;
   content: Content[];
+  language: string;
 }
 
-export function Post({ author, publishedAt, content }: PostProps) {
-  const [comments, setComments] = useState(["Post muito bacana hein?!?!"]);
+export function Post({ author, publishedAt, content, language }: PostProps) {
   const [newCommentText, setNewCommentText] = useState("");
+  const [comments, setComments] = useState(["It's a very cool post huh?!?!"]);
 
-  const publishedDateFormatted = format(
-    publishedAt,
-    "d 'de' LLLL 'às' HH:mm'h'",
-    {
-      locale: ptBR,
-    }
+  const [sendFeedback, setSendFeedback] = useState("Send feedback");
+  const [placeholderComment, setPlaceholderComment] = useState("Add a comment");
+  const [requiredField, setRequiredField] = useState("Required field");
+  const [publishTextButton, setPublishTextButton] = useState("Publish");
+  const [publishedDateFormatted, setPublishedDateFormatted] = useState(
+    format(publishedAt, "LLLL',' d 'at' HH:mm'h'", {
+      locale: enUS,
+    })
   );
+  const [publishedDateRelativeToNow, setPublishedDateRelativeToNow] =
+    useState<string>(
+      formatDistanceToNow(publishedAt, {
+        locale: enUS,
+        addSuffix: true,
+      })
+    );
 
-  const publishedDateRelativeToNow = formatDistanceToNow(publishedAt, {
-    locale: ptBR,
-    addSuffix: true,
-  });
+  useEffect(() => {
+    switch (language) {
+      case "EN":
+        setSendFeedback("Send feedback");
+        setPlaceholderComment("Add a comment");
+        setRequiredField("Required field");
+        setPublishTextButton("Publish");
+        setPublishedDateFormatted(
+          format(publishedAt, "LLLL',' d 'at' HH:mm'h'", {
+            locale: enUS,
+          })
+        );
+        setPublishedDateRelativeToNow(
+          formatDistanceToNow(publishedAt, {
+            locale: enUS,
+            addSuffix: true,
+          })
+        );
+        break;
+      case "PT-BR":
+        setSendFeedback("Deixe seu feedback");
+        setPlaceholderComment("Deixe seu comentário");
+        setRequiredField("Este campo é obrigatório!");
+        setPublishTextButton("Publicar");
+        setPublishedDateFormatted(
+          format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
+            locale: ptBR,
+          })
+        );
+        setPublishedDateRelativeToNow(
+          formatDistanceToNow(publishedAt, {
+            locale: ptBR,
+            addSuffix: true,
+          })
+        );
+        break;
+      default:
+        setSendFeedback("Send feedback");
+        setPlaceholderComment("Add a comment");
+        setRequiredField("Required field");
+        setPublishTextButton("Publish");
+        setPublishedDateFormatted(
+          format(publishedAt, "LLLL',' d 'at' HH:mm'h'", {
+            locale: enUS,
+          })
+        );
+        setPublishedDateRelativeToNow(
+          formatDistanceToNow(publishedAt, {
+            locale: enUS,
+            addSuffix: true,
+          })
+        );
+        break;
+    }
+  }, [language]);
 
   function handleCreateNewComment(event: FormEvent) {
     event.preventDefault();
@@ -54,7 +122,7 @@ export function Post({ author, publishedAt, content }: PostProps) {
   }
 
   function handleNewCommentInvalid(event: InvalidEvent<HTMLTextAreaElement>) {
-    event.target.setCustomValidity("Este campo é obrigatório!");
+    event.target.setCustomValidity(requiredField);
   }
 
   function deleteComment(commentToDelete: string) {
@@ -97,10 +165,10 @@ export function Post({ author, publishedAt, content }: PostProps) {
         })}
       </div>
       <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
-        <strong>Deixe seu feedback</strong>
+        <strong>{sendFeedback}</strong>
         <textarea
           name="comment"
-          placeholder="Deixe seu comentário"
+          placeholder={placeholderComment}
           value={newCommentText}
           onChange={handleNewCommentChange}
           onInvalid={handleNewCommentInvalid}
@@ -108,7 +176,7 @@ export function Post({ author, publishedAt, content }: PostProps) {
         />
         <footer>
           <button type="submit" disabled={isNewCommentEmpty}>
-            Publicar
+            {publishTextButton}
           </button>
         </footer>
       </form>
@@ -118,6 +186,7 @@ export function Post({ author, publishedAt, content }: PostProps) {
             <Comment
               key={comment}
               content={comment}
+              language={language}
               onDeleteComment={deleteComment}
             />
           );

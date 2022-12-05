@@ -6,6 +6,7 @@ import profilePicture from "./assets/profile.png";
 import styles from "./App.module.css";
 
 import "./global.css";
+import { useState } from "react";
 
 const posts = [
   {
@@ -16,11 +17,11 @@ const posts = [
       role: "Web Developer",
     },
     content: [
-      { type: "paragraph", content: "Fala galeraa 👋" },
+      { type: "paragraph", content: "Hello folks 👋" },
       {
         type: "paragraph",
         content:
-          "Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀",
+          "I just uploaded another project to my portfolio. It's a NLW Return's project, a Rocketseat event. Project name is DoctorCare 🚀",
       },
       { type: "link", content: "jane.design/doctorcare" },
     ],
@@ -30,7 +31,7 @@ const posts = [
     id: 2,
     author: {
       avatarUrl: profilePicture,
-      name: "Elisiane Quadros",
+      name: "Someone from somewhere",
       role: "Web Developer Educator",
     },
     content: [
@@ -38,7 +39,7 @@ const posts = [
       {
         type: "paragraph",
         content:
-          "Acabei de subir mais um projeto no meu portifa. É um projeto que fiz no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀",
+          "I just uploaded another project to my portfolio. It's a NLW Return's project, a Rocketseat event. Project name is DoctorCare 🚀",
       },
       { type: "link", content: "jane.design/doctorcare" },
     ],
@@ -46,15 +47,15 @@ const posts = [
   },
 ];
 
-// Iteração: Repetir alguma coisa, criar uma estrutura de repetição.
-
 export function App() {
+  const [language, setLanguage] = useState<string>("EN");
+
   return (
     <div>
-      <Header />
+      <Header language={language} setLanguage={setLanguage} />
 
       <div className={styles.wrapper}>
-        <Sidebar />
+        <Sidebar language={language} />
         <main>
           {posts.map((post) => {
             return (
@@ -63,6 +64,7 @@ export function App() {
                 author={post.author}
                 content={post.content}
                 publishedAt={post.publishedAt}
+                language={language}
               />
             );
           })}
