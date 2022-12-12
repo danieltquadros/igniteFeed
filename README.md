@@ -21,6 +21,8 @@ PERSONAL CONTRIBUTION:
 Added functionality to change system languages using the Select component of Material UI.
 This feature alternates all system texts betwenn Brazilian Portuguese and American English.
 
+![alt text02](src/assets/readme-02.png)
+
 # Tecnologies:
 
 * ReactJS + Vite + Typescript
