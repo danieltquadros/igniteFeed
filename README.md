@@ -35,10 +35,10 @@ EN - PERSONAL CONTRIBUTION:
 Added functionality to change system languages using the Select component of Material UI.
 This feature alternates all system texts betwenn Brazilian Portuguese and American English.
 
-PT - CONTRIBUIÇÃO PESSOAL AO PROJETO:
+PT - CONTRIBUIÇÃO PESSOAL:
 
-Adicionado a funcionalidade de alteração de idiomas do sistema utilizando o componente <Select> do Material UI.
-Esta funcionalidade alterna todos os textos do sistema entre os idiomas Português do Brasil e o Inglês Americano.
+Adicionado a funcionalidade de alteração de idiomas utilizando o componente Select do Material UI.
+Esta funcionalidade alterna todos os textos do sistema entre os idiomas Português do brasil e o Inglês Americano.
 
 ![alt text02](src/assets/readme-02.png)
 
