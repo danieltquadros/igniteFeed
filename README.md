@@ -16,7 +16,13 @@ The system also allows adding and removing comments.
 
 ------------
 
-CONTRIBUIÇÃO PESSOAL AO PROJETO:
+PERSONAL CONTRIBUTION:
 
-Adicionado a funcionalidade de alteração de idiomas do sistema utilizando o componente <Select> do Material UI.
-Esta funcionalidade alterna todos os textos do sistema entre os idiomas Português do Brasil e o Inglês Americano.
+Added functionality to change system languages using the <Select> component of Material UI.
+This feature alternates all system texts between Brazilian Portuguese and American English.
+
+![alt text02](src/assets/readme-02.png)
+
+![alt text03](src/assets/readme-03.png)
+
+![alt text04](src/assets/readme-04.png)
