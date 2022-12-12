@@ -24,12 +24,14 @@ PERSONAL CONTRIBUTION:
 
 Added functionality to change system languages using the <Select> component of Material UI.
 This feature alternates all system texts between Brazilian Portuguese and American English.
+ 
+------------
 
 ![readme-02](src/assets/readme-02.png)
 
 ![readme-03](src/assets/readme-03.png)
 
-!readme-04](src/assets/readme-04.png)
+![readme-04](src/assets/readme-04.png)
 
 ------------
 
@@ -45,6 +47,8 @@ This feature alternates all system texts between Brazilian Portuguese and Americ
   * React rendering flow
   * Immutability
   * Styling (modules.css)
+ 
+------------
 
 # Main dependencies:
 
