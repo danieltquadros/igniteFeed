@@ -16,6 +16,11 @@ The system also allows adding and removing comments.
 
 ------------
 
+PERSONAL CONTRIBUTION:
+
+Added functionality to change system languages using the Select component of Material UI.
+This feature alternates all system texts betwenn Brazilian Portuguese and American English.
+
 # Tecnologies:
 
 * ReactJS + Vite + Typescript
