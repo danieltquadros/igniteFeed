@@ -16,49 +16,6 @@ The system also allows adding and removing comments.
 
 ![alt text01](src/assets/readme-01.png)
 
-Look at the exemple
-
-------------
-
-PERSONAL CONTRIBUTION:
-
-Added functionality to change system languages using the <Select> component of Material UI.
-This feature alternates all system texts between Brazilian Portuguese and American English.
- 
-------------
-
-![readme-02](src/assets/readme-02.png)
-
-![readme-03](src/assets/readme-03.png)
-
-![readme-04](src/assets/readme-04.png)
-
-------------
-
-# Technologies:
-
-1. ReactJS + Vite + Typescript
-
-  * Components
-  * Properties (props)
-  * React Hooks
-    - useState
-    - useEffect
-  * React rendering flow
-  * Immutability
-  * Styling (modules.css)
- 
-------------
-
-# Main dependencies:
-
-    * date-fns 2.29.3
-    * phosphor-react 1.4.1
-    * @emotion/react ^11.10.5
-    * @emotion/styled ^11.10.5
-    * @mui/material ^5.10.16
-
-------------
 
 ------------
 
