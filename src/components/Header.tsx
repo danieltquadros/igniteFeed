@@ -1,50 +1,35 @@
-import styles from "./Header.module.css";
-
-import igniteLogo from "../assets/ignite-logo.svg";
-import americanFlag from "../assets/americanflag.svg";
-import brazilianFlag from "../assets/brazilianflag.svg";
-
-import { useEffect, useState } from "react";
+// Material UI
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
+// Assets
+import igniteLogo from "../assets/ignite-logo.svg";
+import americanFlag from "../assets/americanflag.svg";
+import brazilianFlag from "../assets/brazilianflag.svg";
+
+// Styles
+import styles from "./Header.module.css";
+
+// Interfaces
+import * as ILanguage from "../interfaces/ILanguage";
+
+// Local interfaces
 interface PropsHeader {
   language: string;
   setLanguage: (language: string) => void;
+  currentLanguage: ILanguage.model;
 }
 
-export function Header({ language, setLanguage }: PropsHeader) {
-  const [languageText, setLanguageText] = useState("Language:");
-  const [languageEnglish, setLanguageEnglish] = useState("English");
-  const [languagePortuguese, setLanguagePortuguese] = useState("Portuguese");
-
-  useEffect(() => {
-    switch (language) {
-      case "EN":
-        setLanguageText("Language:");
-        setLanguageEnglish("English");
-        setLanguagePortuguese("Portuguese");
-        break;
-      case "PT-BR":
-        setLanguageText("Idioma:");
-        setLanguageEnglish("Inglês");
-        setLanguagePortuguese("Português");
-        break;
-      default:
-        setLanguageText("Language:");
-        setLanguageEnglish("English");
-        setLanguagePortuguese("Portuguese");
-        break;
-    }
-  }, [language]);
-
+export function Header({
+  language,
+  setLanguage,
+  currentLanguage,
+}: PropsHeader) {
   function handleLanguage(event: SelectChangeEvent) {
     setLanguage(event?.target.value);
   }
-
-  console.log(language);
 
   return (
     <header className={styles.header}>
@@ -59,31 +44,34 @@ export function Header({ language, setLanguage }: PropsHeader) {
         <div className={styles.language}>
           <FormControl size="small" className={styles.formSelect}>
             <InputLabel id="languageSelect" className={styles.inputLabel}>
-              {languageText}
+              {currentLanguage.header.languageText}
             </InputLabel>
             <Select
               labelId="languageSelect"
               id="languageSelect"
+              className={styles.selectedItem}
               value={language}
-              label={languageText}
+              label={currentLanguage.header.languageText}
               onChange={handleLanguage}
             >
-              <MenuItem value="EN">
+              <MenuItem value="EN" className={styles.menuItem}>
                 <img
                   src={americanFlag}
                   alt="American flag"
                   className={styles.imageFlag}
                 />
-                <span className={styles.menuItemText}>{languageEnglish}</span>
+                <span className={styles.menuItemText}>
+                  {currentLanguage.header.languageEnglish}
+                </span>
               </MenuItem>
-              <MenuItem value="PT-BR">
+              <MenuItem value="PT-BR" className={styles.menuItem}>
                 <img
                   src={brazilianFlag}
                   alt="Brazilian flag"
                   className={styles.imageFlag}
                 />
                 <span className={styles.menuItemText}>
-                  {languagePortuguese}
+                  {currentLanguage.header.languagePortuguese}
                 </span>
               </MenuItem>
             </Select>

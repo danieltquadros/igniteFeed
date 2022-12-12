@@ -1,19 +1,21 @@
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from "react";
+
+// date-fns
 import { format, formatDistanceToNow } from "date-fns";
 import ptBR from "date-fns/locale/pt-BR";
 import enUS from "date-fns/esm/locale/en-US";
-import {
-  ChangeEvent,
-  FormEvent,
-  InvalidEvent,
-  useEffect,
-  useState,
-} from "react";
 
+// Components
 import { Avatar } from "./Avatar";
 import { Comment } from "./Comment";
 
+// Styles
 import styles from "./Post.module.css";
 
+// Interfaces
+import * as ILanguage from "../interfaces/ILanguage";
+
+// Local interfaces
 interface Author {
   name: string;
   role: string;
@@ -29,84 +31,54 @@ interface PostProps {
   author: Author;
   publishedAt: Date;
   content: Content[];
-  language: string;
+  currentLanguage: ILanguage.model;
 }
 
-export function Post({ author, publishedAt, content, language }: PostProps) {
+export function Post({
+  author,
+  publishedAt,
+  content,
+  currentLanguage,
+}: PostProps) {
   const [newCommentText, setNewCommentText] = useState("");
   const [comments, setComments] = useState(["It's a very cool post huh?!?!"]);
 
-  const [sendFeedback, setSendFeedback] = useState("Send feedback");
-  const [placeholderComment, setPlaceholderComment] = useState("Add a comment");
-  const [requiredField, setRequiredField] = useState("Required field");
-  const [publishTextButton, setPublishTextButton] = useState("Publish");
-  const [publishedDateFormatted, setPublishedDateFormatted] = useState(
-    format(publishedAt, "LLLL',' d 'at' HH:mm'h'", {
-      locale: enUS,
-    })
-  );
-  const [publishedDateRelativeToNow, setPublishedDateRelativeToNow] = useState(
-    formatDistanceToNow(publishedAt, {
-      locale: enUS,
-      addSuffix: true,
-    })
-  );
-
-  useEffect(() => {
-    switch (language) {
+  const publishedDateFormatted = () => {
+    switch (currentLanguage.languageName) {
       case "EN":
-        setSendFeedback("Send feedback");
-        setPlaceholderComment("Add a comment");
-        setRequiredField("Required field");
-        setPublishTextButton("Publish");
-        setPublishedDateFormatted(
-          format(publishedAt, "LLLL',' d 'at' HH:mm'h'", {
-            locale: enUS,
-          })
-        );
-        setPublishedDateRelativeToNow(
-          formatDistanceToNow(publishedAt, {
-            locale: enUS,
-            addSuffix: true,
-          })
-        );
-        break;
+        return format(publishedAt, "LLLL',' d 'at' HH:mm'h'", {
+          locale: enUS,
+        });
       case "PT-BR":
-        setSendFeedback("Deixe seu feedback");
-        setPlaceholderComment("Deixe seu comentário");
-        setRequiredField("Este campo é obrigatório!");
-        setPublishTextButton("Publicar");
-        setPublishedDateFormatted(
-          format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
-            locale: ptBR,
-          })
-        );
-        setPublishedDateRelativeToNow(
-          formatDistanceToNow(publishedAt, {
-            locale: ptBR,
-            addSuffix: true,
-          })
-        );
-        break;
+        return format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
+          locale: ptBR,
+        });
       default:
-        setSendFeedback("Send feedback");
-        setPlaceholderComment("Add a comment");
-        setRequiredField("Required field");
-        setPublishTextButton("Publish");
-        setPublishedDateFormatted(
-          format(publishedAt, "LLLL',' d 'at' HH:mm'h'", {
-            locale: enUS,
-          })
-        );
-        setPublishedDateRelativeToNow(
-          formatDistanceToNow(publishedAt, {
-            locale: enUS,
-            addSuffix: true,
-          })
-        );
-        break;
+        return format(publishedAt, "LLLL',' d 'at' HH:mm'h'", {
+          locale: enUS,
+        });
     }
-  }, [language]);
+  };
+
+  const publishedDateRelativeToNow = () => {
+    switch (currentLanguage.languageName) {
+      case "EN":
+        return formatDistanceToNow(publishedAt, {
+          locale: enUS,
+          addSuffix: true,
+        });
+      case "PT-BR":
+        return formatDistanceToNow(publishedAt, {
+          locale: ptBR,
+          addSuffix: true,
+        });
+      default:
+        return formatDistanceToNow(publishedAt, {
+          locale: enUS,
+          addSuffix: true,
+        });
+    }
+  };
 
   function handleCreateNewComment(event: FormEvent) {
     event.preventDefault();
@@ -121,7 +93,7 @@ export function Post({ author, publishedAt, content, language }: PostProps) {
   }
 
   function handleNewCommentInvalid(event: InvalidEvent<HTMLTextAreaElement>) {
-    event.target.setCustomValidity(requiredField);
+    event.target.setCustomValidity(currentLanguage.post.requiredField);
   }
 
   function deleteComment(commentToDelete: string) {
@@ -144,10 +116,10 @@ export function Post({ author, publishedAt, content, language }: PostProps) {
           </div>
         </div>
         <time
-          title={publishedDateFormatted}
+          title={publishedDateFormatted()}
           dateTime={publishedAt.toISOString()}
         >
-          {publishedDateRelativeToNow}
+          {publishedDateRelativeToNow()}
         </time>
       </header>
       <div className={styles.content}>
@@ -164,10 +136,10 @@ export function Post({ author, publishedAt, content, language }: PostProps) {
         })}
       </div>
       <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
-        <strong>{sendFeedback}</strong>
+        <strong>{currentLanguage.post.sendFeedback}</strong>
         <textarea
           name="comment"
-          placeholder={placeholderComment}
+          placeholder={currentLanguage.post.placeholderComment}
           value={newCommentText}
           onChange={handleNewCommentChange}
           onInvalid={handleNewCommentInvalid}
@@ -175,7 +147,7 @@ export function Post({ author, publishedAt, content, language }: PostProps) {
         />
         <footer>
           <button type="submit" disabled={isNewCommentEmpty}>
-            {publishTextButton}
+            {currentLanguage.post.publishTextButton}
           </button>
         </footer>
       </form>
@@ -185,7 +157,7 @@ export function Post({ author, publishedAt, content, language }: PostProps) {
             <Comment
               key={comment}
               content={comment}
-              language={language}
+              currentLanguage={currentLanguage}
               onDeleteComment={deleteComment}
             />
           );

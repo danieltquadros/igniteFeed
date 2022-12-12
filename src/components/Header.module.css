@@ -1,8 +1,8 @@
-:focus {
+/*:focus {
   outline: none !important;
   box-shadow: none !important;
   border: none !important;
-}
+}*/
 
 .header {
   background: var(--gray-800);
@@ -51,6 +51,18 @@
 
 .inputLabel {
   color: var(--gray-400) !important;
+}
+
+.selectedItem div:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
+}
+
+.menuItem:focus {
+  outline: none;
+  box-shadow: none;
+  border: none;
 }
 
 .menuItemText::before {

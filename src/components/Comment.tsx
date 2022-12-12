@@ -1,47 +1,31 @@
+import { useState } from "react";
 import { ThumbsUp, Trash } from "phosphor-react";
-import { useEffect, useState } from "react";
+
+// Components
 import { Avatar } from "./Avatar";
 
+// Assets
 import profilePicture from "../assets/profile.png";
+
+// Styles
 import styles from "./Comment.module.css";
 
+// Interfaces
+import * as ILanguage from "../interfaces/ILanguage";
+
+// Local interfaces
 interface CommentProps {
   content: string;
-  language: string;
+  currentLanguage: ILanguage.model;
   onDeleteComment: (comment: string) => void;
 }
 
-export function Comment({ content, language, onDeleteComment }: CommentProps) {
+export function Comment({
+  content,
+  currentLanguage,
+  onDeleteComment,
+}: CommentProps) {
   const [likeCount, setLikeCount] = useState(0);
-
-  const [timeTitle, setTimeTitle] = useState("October 6th at 11:33 pm");
-  const [timeText, setTimeText] = useState("About 1h ago");
-  const [deleteCommentTextButton, setDeleteCommentTextButton] =
-    useState("Delete comment");
-  const [clapButtonText, setClapButtonText] = useState("Clap");
-
-  useEffect(() => {
-    switch (language) {
-      case "EN":
-        setTimeTitle("October 6th at 11:33 pm");
-        setTimeText("About 1h ago");
-        setDeleteCommentTextButton("Delete comment");
-        setClapButtonText("Clap");
-        break;
-      case "PT-BR":
-        setTimeTitle("06 de outubro às 23:33");
-        setTimeText("Cerca de 1h atrás");
-        setDeleteCommentTextButton("Deletar comentário");
-        setClapButtonText("Aplaudir");
-        break;
-      default:
-        setTimeTitle("October 6th at 11:33 pm");
-        setTimeText("About 1h ago");
-        setDeleteCommentTextButton("Delete comment");
-        setClapButtonText("Clap");
-        break;
-    }
-  }, [language]);
 
   function handleDeleteComment() {
     onDeleteComment(content);
@@ -59,12 +43,15 @@ export function Comment({ content, language, onDeleteComment }: CommentProps) {
           <header>
             <div className={styles.authorAndTime}>
               <strong>Someone else</strong>
-              <time title={timeTitle} dateTime="2022-10-06 23:33:30">
-                {timeText}
+              <time
+                title={currentLanguage.comment.timeTitle}
+                dateTime="2022-10-06 23:33:30"
+              >
+                {currentLanguage.comment.timeText}
               </time>
             </div>
             <button
-              title={deleteCommentTextButton}
+              title={currentLanguage.comment.deleteCommentTextButton}
               onClick={handleDeleteComment}
             >
               <Trash size={24} />
@@ -75,7 +62,7 @@ export function Comment({ content, language, onDeleteComment }: CommentProps) {
         <footer>
           <button onClick={handleLikeComment}>
             <ThumbsUp />
-            {clapButtonText} <span>{likeCount}</span>
+            {currentLanguage.comment.clapButtonText} <span>{likeCount}</span>
           </button>
         </footer>
       </div>

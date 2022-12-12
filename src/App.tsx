@@ -1,12 +1,20 @@
+import { useEffect, useState } from "react";
+
+// Components
 import { Header } from "./components/Header";
 import { Post } from "./components/Post";
 import { Sidebar } from "./components/Sidebar";
 
-import profilePicture from "./assets/profile.png";
-import styles from "./App.module.css";
+// Utils
+import englishLanguage from "./utils/englishLanguage";
+import portugueseLanguage from "./utils/portugueseLanguage";
 
+// Interfaces
+import * as ILanguage from "./interfaces/ILanguage";
+
+// Styles
 import "./global.css";
-import { useState } from "react";
+import styles from "./App.module.css";
 
 const posts = [
   {
@@ -30,12 +38,12 @@ const posts = [
   {
     id: 2,
     author: {
-      avatarUrl: profilePicture,
+      avatarUrl: "src/assets/profile.png",
       name: "Someone from somewhere",
       role: "Web Developer Educator",
     },
     content: [
-      { type: "paragraph", content: "Fala galeraa 👋" },
+      { type: "paragraph", content: "Hi dears! 👋" },
       {
         type: "paragraph",
         content:
@@ -49,13 +57,33 @@ const posts = [
 
 export function App() {
   const [language, setLanguage] = useState("EN");
+  const [currentLanguage, setCurrentLanguage] =
+    useState<ILanguage.model>(englishLanguage);
+
+  useEffect(() => {
+    switch (language) {
+      case "EN":
+        setCurrentLanguage(englishLanguage);
+        break;
+      case "PT-BR":
+        setCurrentLanguage(portugueseLanguage);
+        break;
+      default:
+        setCurrentLanguage(englishLanguage);
+        break;
+    }
+  }, [language]);
 
   return (
     <div>
-      <Header language={language} setLanguage={setLanguage} />
+      <Header
+        language={language}
+        setLanguage={setLanguage}
+        currentLanguage={currentLanguage}
+      />
 
       <div className={styles.wrapper}>
-        <Sidebar language={language} />
+        <Sidebar currentLanguage={currentLanguage} />
         <main>
           {posts.map((post) => {
             return (
@@ -64,7 +92,7 @@ export function App() {
                 author={post.author}
                 content={post.content}
                 publishedAt={post.publishedAt}
-                language={language}
+                currentLanguage={currentLanguage}
               />
             );
           })}

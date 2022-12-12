@@ -1,4 +1,4 @@
-/--- ENGLISH ---/
+# ENGLISH
 
 # FEED OF POSTS AND COMMENTS
 
@@ -10,12 +10,24 @@ THE PROJECT:
 This project proposes to create a dynamic and responsive page that simulates a social network where the user's profile, posts and post comments appear.
 The system also allows adding and removing comments.
 
-PERSONAL CONTRIBUTION TO THE PROJECT:
+# See the model:
+
+![alt text](src/assets/readme-01.png)
+
+Look at the exemple
+
+PERSONAL CONTRIBUTION:
 
 Added functionality to change system languages using the <Select> component of Material UI.
 This feature alternates all system texts between Brazilian Portuguese and American English.
 
-Technologies:
+![alt text](src/assets/readme-02.png)
+
+![alt text](src/assets/readme-03.png)
+
+![alt text](src/assets/readme-04.png)
+
+# Technologies:
 
 - ReactJS + Typescript
   - Components
@@ -27,7 +39,7 @@ Technologies:
   - Immutability
   - Styling (modules.css)
 
-Main dependencies:
+# Main dependencies:
 
      - date-fns 2.29.3
      - phosphor-react 1.4.1
@@ -35,7 +47,7 @@ Main dependencies:
      - @emotion/styled ^11.10.5
      - @mui/material ^5.10.16
 
-/--- Português ---/
+# Português
 
 # FEED DE POSTS E COMENTÁRIOS
 
@@ -52,7 +64,7 @@ CONTRIBUIÇÃO PESSOAL AO PROJETO:
 Adicionado a funcionalidade de alteração de idiomas do sistema utilizando o componente <Select> do Material UI.
 Esta funcionalidade alterna todos os textos do sistema entre os idiomas Português do Brasil e o Inglês Americano.
 
-Tecnologias utilizadas:
+# Tecnologias utilizadas:
 
 - ReactJS + Typescript
   - Componentes (Components)
@@ -64,7 +76,7 @@ Tecnologias utilizadas:
   - Imutabilidade (Immutability)
   - Estilização (modules.css)
 
-Principais dependências:
+# Principais dependências:
 
     - date-fns 2.29.3
     - phosphor-react 1.4.1

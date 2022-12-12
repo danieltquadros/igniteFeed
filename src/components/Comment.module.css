@@ -21,6 +21,10 @@
 .commentBox footer button:hover {
   color: var(--green-300);
 }
+.commentBox footer button:focus {
+  outline: none;
+  box-shadow: none;
+}
 .commentBox footer button svg {
   margin-right: 0.5rem;
 }
@@ -52,6 +56,10 @@
 }
 .commentContent header button:hover {
   color: var(--red-500);
+}
+.commentContent header button:focus {
+  outline: none;
+  box-shadow: none;
 }
 .authorAndTime strong {
   display: block;

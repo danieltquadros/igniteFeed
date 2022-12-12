@@ -1,30 +1,20 @@
 import { PencilLine } from "phosphor-react";
-import { useEffect, useState } from "react";
+
+// Components
 import { Avatar } from "./Avatar";
 
+// Styles
 import styles from "./Sidebar.module.css";
 
+// Interfaces
+import * as ILanguage from "../interfaces/ILanguage";
+
+// Local interfaces
 interface PropsSideBar {
-  language: string;
+  currentLanguage: ILanguage.model;
 }
 
-export function Sidebar({ language }: PropsSideBar) {
-  const [editProfile, setEditProfile] = useState("Edit profile");
-
-  useEffect(() => {
-    switch (language) {
-      case "EN":
-        setEditProfile("Edit profile");
-        break;
-      case "PT-BR":
-        setEditProfile("Editar seu perfil");
-        break;
-      default:
-        setEditProfile("Edit profile");
-        break;
-    }
-  }, [language]);
-
+export function Sidebar({ currentLanguage }: PropsSideBar) {
   return (
     <aside className={styles.sidebar}>
       <img
@@ -40,7 +30,7 @@ export function Sidebar({ language }: PropsSideBar) {
       <footer>
         <a href="#">
           <PencilLine size={20} />
-          {editProfile}
+          {currentLanguage.sidebar.editProfile}
         </a>
       </footer>
     </aside>
