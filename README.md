@@ -1,5 +1,3 @@
-# ENGLISH
-
 # FEED OF POSTS AND COMMENTS
 
 Project 01 of Rocketseat's Ignite course. Excellent project to start the course, as it works with the basic fundamentals of React.
@@ -16,19 +14,9 @@ The system also allows adding and removing comments.
 
 ![alt text01](src/assets/readme-01.png)
 
-
 ------------
 
-# Português
+CONTRIBUIÇÃO PESSOAL AO PROJETO:
 
-# FEED DE POSTS E COMENTÁRIOS
-
-Projeto 01 do curso Ignite da Rocketseat. Projeto excelente para iniciar o curso, pois trabalha com os fundamentos básicos do React.
-É sempre bom rever algumas tecnologias que já trabalhamos e ter a oportunidade de consolidar ainda mais os conceitos de cada uma delas.
-
-------------
-
-O PROJETO:
-
-Este projeto tem como proposta criar uma página dinâmica e responsiva que simula uma rede social onde aparece o perfil do usuário, os posts e comentários dos posts.
-O sistema permite ainda adicionar e remover comentários.
+Adicionado a funcionalidade de alteração de idiomas do sistema utilizando o componente <Select> do Material UI.
+Esta funcionalidade alterna todos os textos do sistema entre os idiomas Português do Brasil e o Inglês Americano.
