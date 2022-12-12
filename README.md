@@ -32,33 +32,3 @@ O PROJETO:
 
 Este projeto tem como proposta criar uma página dinâmica e responsiva que simula uma rede social onde aparece o perfil do usuário, os posts e comentários dos posts.
 O sistema permite ainda adicionar e remover comentários.
-
-------------
-
-CONTRIBUIÇÃO PESSOAL AO PROJETO:
-
-Adicionado a funcionalidade de alteração de idiomas do sistema utilizando o componente <Select> do Material UI.
-Esta funcionalidade alterna todos os textos do sistema entre os idiomas Português do Brasil e o Inglês Americano.
-
-------------
-
-# Tecnologias utilizadas:
-
-1. ReactJS + Vite + Typescript
-
-  * Componentes (Components)
-  * Propriedades (props)
-  * React Hooks
-    - useState
-    - useEffect
-  * Fluxo de renderização do React
-  * Imutabilidade (Immutability)
-  * Estilização (modules.css)
-
-# Principais dependências:
-
-  * date-fns 2.29.3
-  * phosphor-react 1.4.1
-  * @emotion/react ^11.10.5
-  * @emotion/styled ^11.10.5
-  * @mui/material ^5.10.16
